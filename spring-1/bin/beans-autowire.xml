@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="address" class="com.yorkmass.spring.beans.autowire.Address"
+p:city="beijing" p:street="wudaokou"></bean>
+<!--
+用byType自动装配当出现两个以上同类型匹配项时，会抛异常
+ <bean id="address2" class="com.yorkmass.spring.beans.autowire.Address"
+p:city="tangshan" p:street="caofeidian"></bean>
+ -->
+<bean id="car" class="com.yorkmass.spring.beans.autowire.Car"
+p:brand="audi" p:price="30000"></bean>
+<!-- 
+<bean id="person" class="com.yorkmass.spring.beans.autowire.Person"
+p:name="tom" p:address-ref="address" p:car-ref="car"></bean>
+-->
+<!-- 
+可以使用autowire属性指定自动装配的方式
+byName根据当前bean的setter风格的属性名进行自动装配，若有匹配的，则进行自动装配，没有不装配
+代码：<bean id="person" class="com.yorkmass.spring.beans.autowire.Person"
+p:name="tom" autowire="byName"></bean>
+byType根据bean的类型和当前bean的属性的类型进行自动装配,若IOC容器中有一个以上类型匹配则抛异常
+代码：<bean id="person" class="com.yorkmass.spring.beans.autowire.Person"
+p:name="tom" autowire="byType"></bean>
+ -->
+<bean id="person" class="com.yorkmass.spring.beans.autowire.Person"
+p:name="tom" autowire="byType"></bean>
+
+</beans>

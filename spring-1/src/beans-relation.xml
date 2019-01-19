@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="address" p:city="beijing" p:street="wudaokou" abstract="true"></bean>
+	<!-- bean配置的继承：使用bean的parent属性指定继承哪个bean的配置 
+	若某一个bean的class属性没有指定，则该bean必须是一个抽象bean-->	
+	<bean id="address2" class="com.yorkmass.spring.beans.autowire.Address" p:street="dazhongsi" parent="address"></bean>
+	<bean id="car" class="com.yorkmass.spring.beans.autowire.Car"
+	p:brand="Audi" p:price="30000"></bean>
+<!-- 要求在配置Person时必须有一个关联的car!换句话说person这个bean依赖于Car这个bean-->
+<bean id="person" class="com.yorkmass.spring.beans.autowire.Person"
+p:name="Tom" p:address-ref="address2" p:car-ref="car" depends-on="car"></bean>
+</beans>
